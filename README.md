@@ -57,10 +57,6 @@ This project is designed to become a full **3D city simulation engine**:
 - Loading chunks (infinite world idea)
 - Exploration-based gameplay
 
-### 🤖 AI Integration
-- MH2 AI assistant inside the world
-- Voice control system
-- Smart NPC interaction
 
 ### 🌦️ Environment System
 - Day/Night cycle
