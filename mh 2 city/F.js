@@ -1,35 +1,7 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-<meta charset="UTF-8">
-<title>FPS Galaxy + 3D Model FIX</title>
 
-<style>
-body {
-    margin:0;
-    overflow:hidden;
-    background:rgba(0, 0, 0, 0.678);
-    cursor: crosshair;
- }
-
-</style>
-</head>
-
-<body>
-
-<script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r134/three.min.js"></script>
-
-<script src="https://cdn.jsdelivr.net/npm/three@0.134/examples/js/loaders/GLTFLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.134/examples/js/loaders/FontLoader.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/three@0.134/examples/js/geometries/TextGeometry.js"></script>
-
-<script>
-
-// ================= SCENE =================
 const scene = new THREE.Scene();
 scene.background = new THREE.Color(0x000000);
 
-// ================= CAMERA =================
 const camera = new THREE.PerspectiveCamera(
     75,
     innerWidth/innerHeight,
@@ -39,12 +11,12 @@ const camera = new THREE.PerspectiveCamera(
 
 camera.position.set(0,2,10);
 
-// ================= RENDERER =================
+
 const renderer = new THREE.WebGLRenderer({antialias:true});
 renderer.setSize(innerWidth, innerHeight);
 document.body.appendChild(renderer.domElement);
 
-// ================= LIGHT =================
+
 scene.add(new THREE.AmbientLight(0xffffff,0.4));
 
 const light = new THREE.PointLight(0xffffff,1);
@@ -86,14 +58,14 @@ const stars = new THREE.Points(
 
 scene.add(stars);
 
-// ================= TEXT (FIXED) =================
+// ================= TEXT  =================
 const fontLoader = new THREE.FontLoader();
 
 fontLoader.load(
     'https://threejs.org/examples/fonts/helvetiker_regular.typeface.json',
     function(font){
 
-        const geo = new THREE.TextGeometry("SYLHET",{
+        const geo = new THREE.TextGeometry("MH HRIDOY",{
             font:font,
             size:8,
             height:3
@@ -116,7 +88,7 @@ fontLoader.load(
 let model;
 
 
-// ================= MOUSE LOOK =================
+
 let yaw = 0;
 let pitch = 0;
 let dragging = false;
@@ -167,13 +139,22 @@ function animate(){
 if(keys["arrowup"]) move.y += 1;     
 if(keys["arrowdown"]) move.y -= 1;   
 
+
+
+
     move.normalize();
 
     camera.position.addScaledVector(move, speed);
 
-    const rotSpeed = 0.03;
-if(keys["arrowleft"]) yaw += rotSpeed;   
-if(keys["arrowright"]) yaw -= rotSpeed;  
+const rotSpeed = 0.03;
+
+
+if(keys["arrowleft"]) yaw += rotSpeed;
+if(keys["arrowright"]) yaw -= rotSpeed;
+
+
+if(keys["4"]) pitch += rotSpeed;
+if(keys["1"]) pitch -= rotSpeed; 
     camera.rotation.order = "YXZ";
     camera.rotation.y = yaw;
     camera.rotation.x = pitch;
@@ -182,6 +163,10 @@ if(keys["arrowright"]) yaw -= rotSpeed;
 }
 animate();
 
+
+
+
+
 // ================= RESIZE =================
 window.addEventListener("resize",()=>{
     camera.aspect = innerWidth/innerHeight;
@@ -189,7 +174,3 @@ window.addEventListener("resize",()=>{
     renderer.setSize(innerWidth, innerHeight);
 });
 
-</script>
-
-</body>
-</html>
